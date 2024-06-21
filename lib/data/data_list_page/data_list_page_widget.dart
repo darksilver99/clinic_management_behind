@@ -42,7 +42,6 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
             newsListRecord.orderBy('create_date', descending: true),
       );
       _model.dataList = _model.listResult!.toList().cast<NewsListRecord>();
-      setState(() {});
     });
 
     _model.textController ??= TextEditingController();
@@ -316,7 +315,6 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                                     _model.dataList = _model.listResultSearch!
                                         .toList()
                                         .cast<NewsListRecord>();
-                                    setState(() {});
 
                                     setState(() {});
                                   },
