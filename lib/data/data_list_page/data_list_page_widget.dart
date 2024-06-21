@@ -41,6 +41,8 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
         queryBuilder: (newsListRecord) =>
             newsListRecord.orderBy('create_date', descending: true),
       );
+      _model.dataList = _model.listResult!.toList().cast<NewsListRecord>();
+      setState(() {});
     });
 
     _model.textController ??= TextEditingController();
@@ -304,8 +306,19 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                                   ),
                                 ),
                                 FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
+                                  onPressed: () async {
+                                    _model.listResultSearch =
+                                        await queryNewsListRecordOnce(
+                                      queryBuilder: (newsListRecord) =>
+                                          newsListRecord.orderBy('create_date',
+                                              descending: true),
+                                    );
+                                    _model.dataList = _model.listResultSearch!
+                                        .toList()
+                                        .cast<NewsListRecord>();
+                                    setState(() {});
+
+                                    setState(() {});
                                   },
                                   text: 'Search',
                                   options: FFButtonOptions(
@@ -430,10 +443,10 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                       decoration: BoxDecoration(),
                       child: Builder(
                         builder: (context) {
-                          final dataList = _model.listResult?.toList() ?? [];
+                          final dataListView = _model.dataList.toList();
                           return FlutterFlowDataTable<NewsListRecord>(
                             controller: _model.paginatedDataTableController,
-                            data: dataList,
+                            data: dataListView,
                             numRows: _model.listResult?.length,
                             columnsBuilder: (onSortChanged) => [
                               DataColumn2(
@@ -523,13 +536,15 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                                 ),
                               ),
                             ],
-                            dataRowBuilder: (dataListItem, dataListIndex,
-                                    selected, onSelectChanged) =>
+                            dataRowBuilder: (dataListViewItem,
+                                    dataListViewIndex,
+                                    selected,
+                                    onSelectChanged) =>
                                 DataRow(
                               selected: selected,
                               onSelectChanged: onSelectChanged,
                               color: MaterialStateProperty.all(
-                                dataListIndex % 2 == 0
+                                dataListViewIndex % 2 == 0
                                     ? FlutterFlowTheme.of(context)
                                         .secondaryBackground
                                     : FlutterFlowTheme.of(context)
@@ -538,7 +553,7 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                               cells: [
                                 SelectionArea(
                                     child: Text(
-                                  dataListIndex.toString(),
+                                  dataListViewIndex.toString(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -548,7 +563,7 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                                 )),
                                 SelectionArea(
                                     child: Text(
-                                  dataListItem.subject,
+                                  dataListViewItem.subject,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -559,7 +574,7 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                                 SelectionArea(
                                     child: Text(
                                   dateTimeFormat(
-                                      'd/M/y', dataListItem.createDate!),
+                                      'd/M/y', dataListViewItem.createDate!),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -570,19 +585,21 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                                 SelectionArea(
                                     child: Text(
                                   functions.getStatusText(
-                                      dataListItem.status.toString()),
+                                      dataListViewItem.status.toString()),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Readex Pro',
                                         color: () {
-                                          if (dataListItem.status == 0) {
+                                          if (dataListViewItem.status == 0) {
                                             return FlutterFlowTheme.of(context)
                                                 .tertiary;
-                                          } else if (dataListItem.status == 1) {
+                                          } else if (dataListViewItem.status ==
+                                              1) {
                                             return FlutterFlowTheme.of(context)
                                                 .success;
-                                          } else if (dataListItem.status == 2) {
+                                          } else if (dataListViewItem.status ==
+                                              2) {
                                             return FlutterFlowTheme.of(context)
                                                 .error;
                                           } else {

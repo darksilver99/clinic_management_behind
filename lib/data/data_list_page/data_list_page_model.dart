@@ -18,6 +18,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class DataListPageModel extends FlutterFlowModel<DataListPageWidget> {
+  ///  Local state fields for this page.
+
+  List<NewsListRecord> dataList = [];
+  void addToDataList(NewsListRecord item) => dataList.add(item);
+  void removeFromDataList(NewsListRecord item) => dataList.remove(item);
+  void removeAtIndexFromDataList(int index) => dataList.removeAt(index);
+  void insertAtIndexInDataList(int index, NewsListRecord item) =>
+      dataList.insert(index, item);
+  void updateDataListAtIndex(int index, Function(NewsListRecord) updateFn) =>
+      dataList[index] = updateFn(dataList[index]);
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -35,6 +46,8 @@ class DataListPageModel extends FlutterFlowModel<DataListPageWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
+  List<NewsListRecord>? listResultSearch;
   // State field(s) for PaginatedDataTable widget.
   final paginatedDataTableController =
       FlutterFlowDataTableController<NewsListRecord>();
