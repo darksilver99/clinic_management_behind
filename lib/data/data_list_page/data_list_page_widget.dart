@@ -449,6 +449,7 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                           return FlutterFlowDataTable<NewsListRecord>(
                             controller: _model.paginatedDataTableController,
                             data: dataListView,
+                            numRows: FFAppConstants.rowPerPage,
                             columnsBuilder: (onSortChanged) => [
                               DataColumn2(
                                 label: DefaultTextStyle.merge(
