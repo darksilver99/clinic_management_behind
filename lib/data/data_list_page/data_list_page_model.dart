@@ -29,6 +29,8 @@ class DataListPageModel extends FlutterFlowModel<DataListPageWidget> {
   void updateDataListAtIndex(int index, Function(NewsListRecord) updateFn) =>
       dataList[index] = updateFn(dataList[index]);
 
+  int? pageTotal;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

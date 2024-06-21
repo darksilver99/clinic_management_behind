@@ -43,6 +43,7 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
       );
       await Future.delayed(const Duration(milliseconds: 300));
       _model.dataList = _model.listResult!.toList().cast<NewsListRecord>();
+      _model.pageTotal = _model.listResult?.length;
       setState(() {});
     });
 
@@ -319,6 +320,8 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                                     _model.dataList = _model.listResultSearch!
                                         .toList()
                                         .cast<NewsListRecord>();
+                                    _model.pageTotal =
+                                        _model.listResultSearch?.length;
 
                                     setState(() {});
                                   },
@@ -449,7 +452,7 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                           return FlutterFlowDataTable<NewsListRecord>(
                             controller: _model.paginatedDataTableController,
                             data: dataListView,
-                            numRows: FFAppConstants.rowPerPage,
+                            numRows: _model.pageTotal,
                             columnsBuilder: (onSortChanged) => [
                               DataColumn2(
                                 label: DefaultTextStyle.merge(
