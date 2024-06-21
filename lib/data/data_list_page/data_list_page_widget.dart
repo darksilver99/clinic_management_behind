@@ -449,6 +449,11 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                       child: Builder(
                         builder: (context) {
                           final dataListView = _model.dataList.toList();
+                          if (dataListView.isEmpty) {
+                            return Image.asset(
+                              'assets/images/error_image.jpg',
+                            );
+                          }
                           return FlutterFlowDataTable<NewsListRecord>(
                             controller: _model.paginatedDataTableController,
                             data: dataListView,
@@ -636,6 +641,9 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                                   ],
                                 ),
                               ].map((c) => DataCell(c)).toList(),
+                            ),
+                            emptyBuilder: () => Image.asset(
+                              'assets/images/error_image.jpg',
                             ),
                             paginated: true,
                             selectable: true,
