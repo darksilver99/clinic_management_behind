@@ -41,6 +41,7 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
         queryBuilder: (newsListRecord) =>
             newsListRecord.orderBy('create_date', descending: true),
       );
+      await Future.delayed(const Duration(milliseconds: 300));
       _model.dataList = _model.listResult!.toList().cast<NewsListRecord>();
       setState(() {});
     });
@@ -313,6 +314,8 @@ class _DataListPageWidgetState extends State<DataListPageWidget> {
                                           newsListRecord.orderBy('create_date',
                                               descending: true),
                                     );
+                                    await Future.delayed(
+                                        const Duration(milliseconds: 300));
                                     _model.dataList = _model.listResultSearch!
                                         .toList()
                                         .cast<NewsListRecord>();
