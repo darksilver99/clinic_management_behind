@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "833688089189",
+    "project_id": "clinic-management-mt2ym1",
+    "storage_bucket": "clinic-management-mt2ym1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833688089189:android:08a57c82ef6b3e5d3c0c8c",
+        "android_client_info": {
+          "package_name": "com.silver.clinicmanagement"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpfuuJn3aZEq4zZRBEmoht5MCdKHzwd7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833688089189:android:768dcfb3a4e79d263c0c8c",
+        "android_client_info": {
+          "package_name": "com.silver.clinicmanagementbehind"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpfuuJn3aZEq4zZRBEmoht5MCdKHzwd7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
